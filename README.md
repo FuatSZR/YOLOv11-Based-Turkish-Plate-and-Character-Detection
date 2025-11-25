@@ -1,13 +1,13 @@
-# 🇹🇷 Gelişmiş Türk Plaka Tanıma Sistemi (Advanced Turkish License Plate Recognition - ANPR)
+# Türk Plaka Tanıma Sistemi (Turkish License Plate Recognition - ANPR)
 
 **Etiketler:** `YOLOv11` `YOLOv8` `Streamlit` `Computer-Vision` `ANPR` `License-Plate-Recognition`
 
-Bu proje, görüntü ve videolardaki Türk plakalarını yüksek doğrulukla tespit eden ve okuyan uçtan uca (end-to-end) bir Otomatik Plaka Tanıma (OPT / ANPR) sistemidir. Geliştirilen çift aşamalı YOLO mimarisi, kullanıcı dostu bir arayüz ile **Streamlit** üzerinden gerçek zamanlı olarak sunulur.
+Bu proje, görüntü ve videolardaki Türk plakalarını tespit eden ve okuyan uçtan uca (end-to-end) bir Otomatik Plaka Tanıma (OPT / ANPR) sistemidir. Çift aşamalı YOLO mimarisi ile plaka tanıma ve karakter tespiti yapılarak çalışmaktadır.
 
 ## 🌟 Öne Çıkan Özellikler
 
   * **Çift Aşamalı YOLO Mimarisi:** Plaka tespiti için **YOLOv11n** ve karakter tanıma için **YOLOv8n** olmak üzere iki ayrı optimize edilmiş model kullanılır.
-  * **Web Uygulaması (Streamlit):** Kullanıcının resim yükleyerek anlık sonuç alabileceği, temiz ve etkileşimli bir web arayüzü sunar.
+  * **Web Uygulaması (Streamlit):** Kullanıcının resim yükleyerek anlık sonuç alabileceği etkileşimli bir web arayüzü sunar.
   * **Yüksek Doğruluk:** Türkiye plaka standardına özel verilerle eğitilmiş, yerelleştirilmiş çözümdür.
   * **Uçtan Uca Çözüm:** Tespitten (Detection) okumaya (Reading) kadar tüm süreç otomatikleştirilmiştir.
 
