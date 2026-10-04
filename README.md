@@ -1,23 +1,19 @@
-# Türk Plaka Tanıma Sistemi (Turkish License Plate Recognition - ANPR)
+# Türkçe Plaka Tanıma Sistemi (Turkish License Plate Recognition - ANPR)
 
-**Etiketler:** `YOLOv11` `YOLOv8` `Streamlit` `Computer-Vision` `ANPR` `License-Plate-Recognition`
+Bu proje, görüntü ve videolardaki Türk plakalarını tespit eden ve okuyan uçtan uca (end-to-end) bir Otomatik Plaka Tanıma (ANPR) sistemidir. Çift aşamalı YOLO mimarisi ile plaka tanıma ve karakter tespiti yapılarak çalışmaktadır.
 
-Bu proje, görüntü ve videolardaki Türk plakalarını tespit eden ve okuyan uçtan uca (end-to-end) bir Otomatik Plaka Tanıma (OPT / ANPR) sistemidir. Çift aşamalı YOLO mimarisi ile plaka tanıma ve karakter tespiti yapılarak çalışmaktadır.
-
-## 🌟 Öne Çıkan Özellikler
-
-  * **Çift Aşamalı YOLO Mimarisi:** Plaka tespiti için **YOLOv11n** ve karakter tanıma için **YOLOv8n** olmak üzere iki ayrı optimize edilmiş model kullanılır.
-  * **Web Uygulaması (Streamlit):** Kullanıcının resim yükleyerek anlık sonuç alabileceği etkileşimli bir web arayüzü sunar.
-  * **Yüksek Doğruluk:** Türkiye plaka standardına özel verilerle eğitilmiş, yerelleştirilmiş çözümdür.
-  * **Uçtan Uca Çözüm:** Tespitten (Detection) okumaya (Reading) kadar tüm süreç otomatikleştirilmiştir.
+  * Plaka tespiti için **YOLOv11n** ve karakter tanıma için **YOLOv8n** olmak üzere iki ayrı optimize edilmiş model kullanılmıştır.
+  * Kullanıcının resim yükleyerek anlık sonuç alabileceği etkileşimli bir streamlit web arayüzü eklenmiştir. 
+  * Modeller Türkiye plakları veri setleriyle eğitilmiştir
+  * Tüm süreç otomatikleştirilmiştir.
 
 -----
 
-## 🏗️ Proje Mimarisi ve Çalışma Prensibi
+## Proje Mimarisi
 
-Sistem, ana Streamlit uygulaması (**`main.py`**) tarafından koordine edilen, sırasıyla **Plaka Tespiti** ve **Karakter Tanıma** olmak üzere iki ana aşamada çalışır.
+Sistem, ana Streamlit uygulaması (**`main.py`**) tarafından koordine edilen, sırasıyla **Plaka Tespiti** ve **Karakter Tanıma** olmak üzere iki ana aşamada çalışmaktadır.
 
-### 📂 Proje Dosya Yapısı
+### Dosya Yapısı
 
 ```
 .
@@ -30,7 +26,7 @@ Sistem, ana Streamlit uygulaması (**`main.py`**) tarafından koordine edilen, s
 └── README.md                 # Bu dosya
 ```
 
-### 🎯 Aşama 1: Plaka Tespiti (Plate Detection)
+### 1 - Plaka Tespiti 
 
 Bu aşama, giriş görüntüsündeki plaka bölgelerini izole etmeyi hedefler.
 
@@ -39,10 +35,9 @@ Bu aşama, giriş görüntüsündeki plaka bölgelerini izole etmeyi hedefler.
 | **Model** | **YOLOv11n** (Nano) |
 | **Amaç** | Görüntü içindeki plakanın Bounding Box koordinatlarını bulmak. |
 | **Eğitim Verisi** | Kaggle - [Turkish License Plate Dataset] |
-| **Eğitim Parametreleri** | `epochs=50`, `imgsz=640`, `batch=16` |
 | **Çıktı** | Tespit edilen plaka bölgelerinin kırpılmış (cropped) görüntüleri. |
 
-### 📝 Aşama 2: Plaka Okuma (Character Recognition)
+### 2 - Plaka Okuma
 
 Kırpılmış plaka görüntüleri üzerinde çalışarak her bir karakteri tanır ve sıralar.
 
@@ -51,12 +46,11 @@ Kırpılmış plaka görüntüleri üzerinde çalışarak her bir karakteri tan�
 | **Model** | **YOLOv8n** (Nano) |
 | **Amaç** | Plaka üzerindeki her bir harfi ve rakamı sınıflandırmak. |
 | **Eğitim Parametreleri** | `epochs=50`, `imgsz=640`, `batch=16` |
-| **Post-Processing** | Karakterler, doğru plaka metnini oluşturmak için **x-ekseni koordinatlarına göre** sıralanır. |
-| **Nihai Çıktı** | Plakanın metin hali (`AB34ABC`). |
+| **Çıktı** | Plakanın metin hali (`AB34ABC`). |
 
 -----
 
-## 💻 Kurulum ve Kullanım
+## Kurulum ve Kullanım
 
 Projenin yerel makinenizde çalıştırılması için aşağıdaki adımları izleyin.
 
@@ -69,7 +63,7 @@ cd <proje-klasörü>
 
 ### Adım 2: Bağımlılıkları Yükleme
 
-Proje, `ultralytics` ve `streamlit` dahil olmak üzere gerekli tüm kütüphaneleri `requirements.txt` dosyası üzerinden yönetir.
+Proje, `ultralytics` ve `streamlit` dahil olmak üzere gerekli tüm kütüphaneleri `requirements.txt` dosyası üzerinden yönetmektedir.
 
 ```bash
 pip install -r requirements.txt
@@ -94,7 +88,7 @@ streamlit run main.py
 
 Uygulama, yerel sunucunuzda (genellikle `http://localhost:8501`) otomatik olarak açılacaktır.
 
-### 🖼️ Uygulama Kullanımı
+### Uygulama Kullanımı
 
 1.  Uygulama arayüzündeki **"Upload an image"** bölümünü kullanarak bir resim yükleyin (`.png`, `.jpg`, `.jpeg`).
 2.  Uygulama, resmi yüklendikten sonra otomatik olarak **`detect_plate`** fonksiyonunu çağırır.
@@ -134,22 +128,22 @@ plate_text_location.sort(key=lambda x: x[0])
 # ...
 ```
 
-## 💡 Gelecek Geliştirme Fikirleri
+## Gelecek Geliştirme Fikirleri
 
 Mevcut proje, çift aşamalı YOLO mimarisi ve Streamlit arayüzü ile güçlü bir temel sunmaktadır. Doğruluğu, hızı ve işlevselliği daha da artırmak için aşağıdaki geliştirmeler yapılabilir:
 
-### 1. Karakter Tanıma Doğruluğunu Artırma (YOLOv11L Varyantı)
+### 1 - Karakter Tanıma Doğruluğunu Artırma (YOLOv11L Varyantı)
 
 Projenin en önemli geliştirme alanı, **Plaka Okuma (Aşama 2)** modelinin performansını artırmaktır.
 
 * **Model Yükseltme:** Mevcut **YOLOv8n** (Nano) modelini, daha yüksek doğruluk potansiyeli sunan **YOLOv11L** (Large) veya **YOLOv11X** (Extra Large) gibi daha güçlü bir YOLO varyantı ile değiştirmek. Daha büyük bir model, daha karmaşık karakter biçimlerini ve düşük çözünürlüklü görüntüleri daha iyi işleyebilir.
 * **Özel Türkçe Karakter Veri Seti:** Karakter tanıma modelini eğitmek için, **yalnızca Türkçe plakalardan kırpılmış, zenginleştirilmiş ve özel olarak etiketlenmiş** büyük bir veri seti kullanılmalıdır. Bu, modelin özellikle zorlu koşullarda (eğik, kirli, hasarlı plakalar) bile yüksek doğrulukta sonuç vermesini sağlayacaktır.
 
-### 2. Gerçek Zamanlı Video Akışı Desteği
+### 2 - Gerçek Zamanlı Video Akışı Desteği
 
 * Mevcut Streamlit uygulamasını, yüklenen görüntüler yerine **webcam** veya **RTSP/IP kamera** akışını doğrudan işleyebilecek şekilde genişletmek. Bu, sistemi gerçek bir gözetim veya trafik yönetimi senaryosunda kullanıma uygun hale getirir.
 
-### 3. Hız Optimizasyonu ve Model Dönüşümü
+### 3 - Hız Optimizasyonu ve Model Dönüşümü
 
 * Daha hızlı çıkarım (inference) süreleri elde etmek için, eğitilen PyTorch ağırlıklarını **ONNX** veya **TensorRT** gibi daha hafif formatlara dönüştürmek ve bu optimize edilmiş modelleri Streamlit uygulamasında kullanmak. Bu, özellikle CPU tabanlı ortamlarda performansı ciddi ölçüde artırabilir.
 
